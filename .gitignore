@@ -1,0 +1,29 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Xcode
+xcuserdata/
+*.xcuserstate
+*.xcworkspace/xcuserdata/
+*.xcuserdatad/
+DerivedData/
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+
+# Swift Package Manager
+.build/
+Package.resolved
+
+# XcodeGen (regenerate with `xcodegen generate`)
+# Note: .xcodeproj IS committed for designer accessibility.
+# Only user-specific data inside it is ignored (see xcuserdata above).
+
+# Misc
+*.swp
+*~
+.idea/
+.vscode/
