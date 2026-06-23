@@ -33,12 +33,39 @@ final class GameViewModel {
         return allTasks.first { $0.id == id }
     }
 
-    var currentDialog: String {
-        if let last = lastDialog { return last }
-        if currentTask != nil {
-            return "今天先做这个吧～"
+    var currentDay: Int {
+        currentTask?.day ?? 0
+    }
+
+    var smartDialog: String {
+        if let last = lastDialog, !last.isEmpty {
+            return last
         }
-        return "今天的旅程告一段落，明天再来吧"
+        return suggestFromPersonality()
+    }
+
+    var currentDialog: String {
+        smartDialog
+    }
+
+    private func suggestFromPersonality() -> String {
+        guard currentTask != nil else {
+            return "今天的旅程告一段落，明天再来吧"
+        }
+        let p = pet.personality
+        if p.diligence > 0.7 {
+            return "状态超棒！挑战一下重点任务？"
+        }
+        if p.flexibility > 0.7 {
+            return "看你挺随性的，挑个轻量的热身？"
+        }
+        if p.curiosity > 0.7 {
+            return "试试新支线？走走没走过的路。"
+        }
+        if p.patience < 0.3 {
+            return "耐心见底啦，做点简单的放松下？"
+        }
+        return "今天先做这个吧～"
     }
 
     var isFinished: Bool {

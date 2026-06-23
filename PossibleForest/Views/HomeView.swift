@@ -4,6 +4,7 @@ struct HomeView: View {
     @Environment(GameViewModel.self) private var game
     @State private var showStats: Bool = false
     @State private var showDebug: Bool = false
+    @State private var showTopology: Bool = false
 
     var body: some View {
         ZStack {
@@ -49,6 +50,10 @@ struct HomeView: View {
                 }
             }
         }
+        .sheet(isPresented: $showTopology) {
+            TopologyView()
+                .presentationDragIndicator(.visible)
+        }
     }
 
     private var topBar: some View {
@@ -70,8 +75,20 @@ struct HomeView: View {
                     .foregroundStyle(Theme.textSecondary)
             }
             Spacer()
+
+            Button {
+                showTopology = true
+            } label: {
+                Image(systemName: "map.fill")
+                    .font(.headline)
+                    .foregroundStyle(Theme.petPrimary)
+                    .padding(10)
+                    .glassCard(cornerRadius: 14)
+            }
+            .buttonStyle(PressableButtonStyle())
+
             VStack(alignment: .trailing, spacing: 1) {
-                Text("XP")
+                Text(game.currentDay > 0 ? "第 \(game.currentDay) 天" : "DAY")
                     .font(.caption2.weight(.bold))
                     .tracking(1.2)
                     .foregroundStyle(Theme.textSecondary)
@@ -80,15 +97,14 @@ struct HomeView: View {
                     .foregroundStyle(Theme.textPrimary)
                     .contentTransition(.numericText())
             }
-            .padding(.horizontal, 14)
+            .padding(.horizontal, 12)
             .padding(.vertical, 6)
-            .glassCard(cornerRadius: 16)
+            .glassCard(cornerRadius: 14)
             .onTapGesture(count: 2) {
                 withAnimation(.spring(response: 0.35, dampingFraction: 0.75)) {
                     showDebug.toggle()
                 }
             }
-            .help("双击 XP 徽章唤出 Debug 面板")
         }
         .padding(.vertical, 10)
     }

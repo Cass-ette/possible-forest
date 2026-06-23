@@ -74,6 +74,7 @@ struct TaskNode: Identifiable, Codable {
     var subtitle: String
     var category: TaskCategory
     var icon: String?
+    var day: Int
     var outcomes: [OutcomeType: TaskOutcome]
     var isCompleted: Bool
     var chosenOutcome: OutcomeType?
@@ -84,6 +85,7 @@ struct TaskNode: Identifiable, Codable {
         subtitle: String,
         category: TaskCategory,
         icon: String? = nil,
+        day: Int = 1,
         outcomes: [OutcomeType: TaskOutcome]
     ) {
         self.id = id
@@ -91,6 +93,7 @@ struct TaskNode: Identifiable, Codable {
         self.subtitle = subtitle
         self.category = category
         self.icon = icon
+        self.day = day
         self.outcomes = outcomes
         self.isCompleted = false
         self.chosenOutcome = nil

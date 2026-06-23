@@ -17,6 +17,7 @@
 		649DB12567AD220EC989054F /* PetCharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB6155332B1EC1FA18D3E1 /* PetCharacterView.swift */; };
 		7015C8CACC8C361142FA2157 /* TaskLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDED5394A7A2114F294DE3C /* TaskLibrary.swift */; };
 		7E68CAEAE4FF824DFF139EA3 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC050D97E951F07A8FE7CA3 /* OnboardingView.swift */; };
+		82ED20E0249AFBE3E436E997 /* TopologyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45274D0CA7B808C8948B9A00 /* TopologyView.swift */; };
 		85953A7AAB011D6AC9C9CE13 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B829DCC2EB10A036EF2979B4 /* GameViewModel.swift */; };
 		86B9F357F19EEB2C5269DD6D /* Pet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFE7F679D778F73F0AC9438 /* Pet.swift */; };
 		C9E1A57E75874186D72304CE /* PossibleForestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A71374D84D08E5D3804FDF /* PossibleForestApp.swift */; };
@@ -29,6 +30,7 @@
 		2EC050D97E951F07A8FE7CA3 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		3C2BFC14CCAF7532E68BBDD7 /* PetDialogBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDialogBubble.swift; sourceTree = "<group>"; };
 		3F06399ADD9C53487ACBCABD /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		45274D0CA7B808C8948B9A00 /* TopologyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopologyView.swift; sourceTree = "<group>"; };
 		53E28F0AB250580F3E05E983 /* GlassCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassCard.swift; sourceTree = "<group>"; };
 		59A71374D84D08E5D3804FDF /* PossibleForestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PossibleForestApp.swift; sourceTree = "<group>"; };
 		7CDED5394A7A2114F294DE3C /* TaskLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskLibrary.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				0EBB6155332B1EC1FA18D3E1 /* PetCharacterView.swift */,
 				3C2BFC14CCAF7532E68BBDD7 /* PetDialogBubble.swift */,
 				F3E3D1DC96D3C29AA586D80F /* TaskCardView.swift */,
+				45274D0CA7B808C8948B9A00 /* TopologyView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 				7015C8CACC8C361142FA2157 /* TaskLibrary.swift in Sources */,
 				DD49961F2480AA039484B70C /* TaskNode.swift in Sources */,
 				4D072FF8BC6933EC03C4D8E8 /* Theme.swift in Sources */,
+				82ED20E0249AFBE3E436E997 /* TopologyView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
