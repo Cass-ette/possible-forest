@@ -13,6 +13,7 @@
 		278B554DC32394CB2B0750F7 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05E483DF79841DEF90A3401 /* HomeView.swift */; };
 		3D0D3B97A1975A65DC530F9E /* TaskCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E3D1DC96D3C29AA586D80F /* TaskCardView.swift */; };
 		4D072FF8BC6933EC03C4D8E8 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F06399ADD9C53487ACBCABD /* Theme.swift */; };
+		5F4C7CF2DCEE8AD93E1E4ADD /* DebugMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F53D32FEC4A3C622E1C53B /* DebugMenu.swift */; };
 		649DB12567AD220EC989054F /* PetCharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB6155332B1EC1FA18D3E1 /* PetCharacterView.swift */; };
 		7015C8CACC8C361142FA2157 /* TaskLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDED5394A7A2114F294DE3C /* TaskLibrary.swift */; };
 		7E68CAEAE4FF824DFF139EA3 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC050D97E951F07A8FE7CA3 /* OnboardingView.swift */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		0EBB6155332B1EC1FA18D3E1 /* PetCharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetCharacterView.swift; sourceTree = "<group>"; };
+		22F53D32FEC4A3C622E1C53B /* DebugMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugMenu.swift; sourceTree = "<group>"; };
 		2EC050D97E951F07A8FE7CA3 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		3C2BFC14CCAF7532E68BBDD7 /* PetDialogBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDialogBubble.swift; sourceTree = "<group>"; };
 		3F06399ADD9C53487ACBCABD /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 		FAB66011B3915EFE34BF68C7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				22F53D32FEC4A3C622E1C53B /* DebugMenu.swift */,
 				A05E483DF79841DEF90A3401 /* HomeView.swift */,
 				2EC050D97E951F07A8FE7CA3 /* OnboardingView.swift */,
 				0EBB6155332B1EC1FA18D3E1 /* PetCharacterView.swift */,
@@ -175,6 +178,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F4C7CF2DCEE8AD93E1E4ADD /* DebugMenu.swift in Sources */,
 				85953A7AAB011D6AC9C9CE13 /* GameViewModel.swift in Sources */,
 				22CBDC4EB6809B5A366FB60D /* GlassCard.swift in Sources */,
 				278B554DC32394CB2B0750F7 /* HomeView.swift in Sources */,

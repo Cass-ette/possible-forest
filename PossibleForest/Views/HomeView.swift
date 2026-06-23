@@ -3,6 +3,7 @@ import SwiftUI
 struct HomeView: View {
     @Environment(GameViewModel.self) private var game
     @State private var showStats: Bool = false
+    @State private var showDebug: Bool = false
 
     var body: some View {
         ZStack {
@@ -27,6 +28,9 @@ struct HomeView: View {
                 .scrollIndicators(.hidden)
             }
             .padding(.horizontal, 20)
+
+            DebugMenu(isPresented: $showDebug)
+                .ignoresSafeArea(.keyboard)
 
             if game.showCelebration {
                 CelebrationOverlay()
@@ -79,6 +83,12 @@ struct HomeView: View {
             .padding(.horizontal, 14)
             .padding(.vertical, 6)
             .glassCard(cornerRadius: 16)
+            .onTapGesture(count: 2) {
+                withAnimation(.spring(response: 0.35, dampingFraction: 0.75)) {
+                    showDebug.toggle()
+                }
+            }
+            .help("双击 XP 徽章唤出 Debug 面板")
         }
         .padding(.vertical, 10)
     }
