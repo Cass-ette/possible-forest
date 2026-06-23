@@ -94,11 +94,11 @@ struct TaskEditForm: View {
         VStack(alignment: .leading, spacing: 10) {
             label("安排在第几天")
             HStack(spacing: 8) {
-                ForEach(1...3, id: \.self) { d in
+                ForEach([1, 2, 3], id: \.self) { d in
                     Button {
                         day = d
                     } label: {
-                        Text("第 \(d) 天")
+                        Text(["今天", "明天", "后天"][d - 1])
                             .font(.subheadline.weight(.semibold))
                             .foregroundStyle(day == d ? .white : Theme.textPrimary)
                             .frame(maxWidth: .infinity)
@@ -113,6 +113,18 @@ struct TaskEditForm: View {
                     .buttonStyle(PressableButtonStyle())
                 }
             }
+            HStack {
+                Text("更远")
+                    .font(.caption.weight(.medium))
+                    .foregroundStyle(Theme.textSecondary)
+                Spacer()
+                Stepper("第 \(day) 天", value: $day, in: 1...30)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(Theme.textPrimary)
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 10)
+            .glassCard(cornerRadius: 14)
         }
     }
 

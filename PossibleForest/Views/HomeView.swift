@@ -68,7 +68,7 @@ struct HomeView: View {
                     Text(game.pet.name)
                         .font(.title2.weight(.bold))
                         .foregroundStyle(Theme.textPrimary)
-                    Text(game.pet.stage.rawValue)
+                    Text(game.pet.displayStage)
                         .font(.caption.weight(.semibold))
                         .foregroundStyle(Theme.textPrimary)
                         .padding(.horizontal, 8)
@@ -226,7 +226,7 @@ struct StageUpOverlay: View {
                 PetCharacterView(stage: stage, mood: .celebrating)
                     .frame(height: 200)
 
-                Text("变成了「\(stage.rawValue)」形态")
+                Text("升级到了「\(stage.rawValue)」")
                     .font(.headline)
                     .foregroundStyle(.white)
 
