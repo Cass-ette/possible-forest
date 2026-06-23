@@ -20,13 +20,16 @@
 		82ED20E0249AFBE3E436E997 /* TopologyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45274D0CA7B808C8948B9A00 /* TopologyView.swift */; };
 		85953A7AAB011D6AC9C9CE13 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B829DCC2EB10A036EF2979B4 /* GameViewModel.swift */; };
 		86B9F357F19EEB2C5269DD6D /* Pet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFE7F679D778F73F0AC9438 /* Pet.swift */; };
+		AD8D269B94EE4044FCE8575F /* TaskEditForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13B8FE904D6290622E2907D /* TaskEditForm.swift */; };
 		C9E1A57E75874186D72304CE /* PossibleForestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A71374D84D08E5D3804FDF /* PossibleForestApp.swift */; };
 		DD49961F2480AA039484B70C /* TaskNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889BE30068F585CC0A9D8271 /* TaskNode.swift */; };
+		F25790361164B56E74BF5C5F /* PlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2357698FF03C51E3F66527F5 /* PlanView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0EBB6155332B1EC1FA18D3E1 /* PetCharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetCharacterView.swift; sourceTree = "<group>"; };
 		22F53D32FEC4A3C622E1C53B /* DebugMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugMenu.swift; sourceTree = "<group>"; };
+		2357698FF03C51E3F66527F5 /* PlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanView.swift; sourceTree = "<group>"; };
 		2EC050D97E951F07A8FE7CA3 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		3C2BFC14CCAF7532E68BBDD7 /* PetDialogBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDialogBubble.swift; sourceTree = "<group>"; };
 		3F06399ADD9C53487ACBCABD /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -40,6 +43,7 @@
 		AA523F08E629AD8E5B1D22F6 /* PossibleForest.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = PossibleForest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B829DCC2EB10A036EF2979B4 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		BFFE7F679D778F73F0AC9438 /* Pet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pet.swift; sourceTree = "<group>"; };
+		F13B8FE904D6290622E2907D /* TaskEditForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditForm.swift; sourceTree = "<group>"; };
 		F3E3D1DC96D3C29AA586D80F /* TaskCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,7 +104,9 @@
 				2EC050D97E951F07A8FE7CA3 /* OnboardingView.swift */,
 				0EBB6155332B1EC1FA18D3E1 /* PetCharacterView.swift */,
 				3C2BFC14CCAF7532E68BBDD7 /* PetDialogBubble.swift */,
+				2357698FF03C51E3F66527F5 /* PlanView.swift */,
 				F3E3D1DC96D3C29AA586D80F /* TaskCardView.swift */,
+				F13B8FE904D6290622E2907D /* TaskEditForm.swift */,
 				45274D0CA7B808C8948B9A00 /* TopologyView.swift */,
 			);
 			path = Views;
@@ -189,8 +195,10 @@
 				86B9F357F19EEB2C5269DD6D /* Pet.swift in Sources */,
 				649DB12567AD220EC989054F /* PetCharacterView.swift in Sources */,
 				18C3D55758C6122E4085DF39 /* PetDialogBubble.swift in Sources */,
+				F25790361164B56E74BF5C5F /* PlanView.swift in Sources */,
 				C9E1A57E75874186D72304CE /* PossibleForestApp.swift in Sources */,
 				3D0D3B97A1975A65DC530F9E /* TaskCardView.swift in Sources */,
+				AD8D269B94EE4044FCE8575F /* TaskEditForm.swift in Sources */,
 				7015C8CACC8C361142FA2157 /* TaskLibrary.swift in Sources */,
 				DD49961F2480AA039484B70C /* TaskNode.swift in Sources */,
 				4D072FF8BC6933EC03C4D8E8 /* Theme.swift in Sources */,

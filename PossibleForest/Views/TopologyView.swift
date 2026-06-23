@@ -74,10 +74,20 @@ struct TopologyView: View {
                 edgesLayer
                 nodesLayer
             }
-            .frame(width: 1000, height: 720)
+            .frame(width: canvasSize.width, height: canvasSize.height)
             .padding(20)
         }
         .scrollIndicators(.hidden)
+    }
+
+    private var canvasSize: CGSize {
+        let maxDay = max(1, game.allTasks.map(\.day).max() ?? 1)
+        let maxCount = (1...maxDay).map { day in
+            game.allTasks.filter { $0.day == day }.count
+        }.max() ?? 1
+        let width = max(800, CGFloat(maxCount - 1) * 130 + 240)
+        let height = max(500, CGFloat(maxDay - 1) * 220 + 200)
+        return CGSize(width: width, height: height)
     }
 
     // MARK: - Layers
@@ -115,13 +125,14 @@ struct TopologyView: View {
 
     private func nodePosition(for task: TaskNode) -> CGPoint {
         let dayTasks = game.allTasks.filter { $0.day == task.day }
+        let count = dayTasks.count
         let idx = dayTasks.firstIndex(where: { $0.id == task.id }) ?? 0
-        switch task.day {
-        case 1: return CGPoint(x: 500, y: 80)
-        case 2: return CGPoint(x: 200 + CGFloat(idx) * 300, y: 300)
-        case 3: return CGPoint(x: 60 + CGFloat(idx) * 105, y: 560)
-        default: return .zero
-        }
+
+        let totalWidth = CGFloat(max(1, count - 1)) * 130
+        let startX = (canvasSize.width - totalWidth) / 2
+        let x = startX + CGFloat(idx) * 130
+        let y = 90 + CGFloat(max(0, task.day - 1)) * 220
+        return CGPoint(x: x, y: y)
     }
 
     private func delay(for task: TaskNode) -> Double {

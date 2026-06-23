@@ -1,11 +1,25 @@
 import Foundation
 
-/// Demo 剧情：周日午后的小旅程（3 天 / 3 层深度 / 9 个终点）
-///
-/// Day 1: 整理桌面（起点）
-/// Day 2: 写论文 / 冲咖啡 / 散步（3 条支线）
-/// Day 3: 9 个终点叶子（每个 Day 2 任务对应 3 个）
+/// 任务种子数据
+/// - `simpleSamples()`: 默认启动数据（4 个独立日常任务，用户可自由增删改）
+/// - `demoTree()`: 9 分支剧情 demo（通过 debug 菜单的「加载剧情 Demo」按需启用）
 enum TaskLibrary {
+
+    /// 默认种子：4 个独立日常任务（无预设连接，用户随意安排）
+    static func simpleSamples() -> [TaskNode] {
+        [
+            TaskNode(title: "回邮件", subtitle: "5 封，10 分钟搞定",
+                     category: .work, icon: "envelope.fill", day: 1, outcomes: [:]),
+            TaskNode(title: "写报告", subtitle: "季度总结初稿",
+                     category: .work, icon: "doc.text.fill", day: 1, outcomes: [:]),
+            TaskNode(title: "散步", subtitle: "让脑子透透气",
+                     category: .health, icon: "figure.walk", day: 1, outcomes: [:]),
+            TaskNode(title: "读书", subtitle: "《深度工作》第三章",
+                     category: .study, icon: "book.fill", day: 1, outcomes: [:])
+        ]
+    }
+
+    /// 9 分支剧情 demo（周日午后的小旅程，3 天 / 9 个终点）
     static func demoTree() -> [TaskNode] {
         let submit = UUID(); let library = UUID(); let movie = UUID()
         let read = UUID();   let music = UUID();   let nap = UUID()
@@ -145,6 +159,25 @@ enum TaskLibrary {
                 .abandon: .init(type: .abandon, petDialog: dialog, unlockTaskIDs: [],
                                 personalityDelta: .abandon, xpGain: 5)
             ]
+        )
+    }
+}
+
+extension TaskOutcome {
+    /// 为没有预设结局的独立任务提供默认反馈
+    static func defaultOutcome(_ type: OutcomeType, task: TaskNode) -> TaskOutcome {
+        let dialog: String
+        switch type {
+        case .perfect: dialog = "漂亮！「\(task.title)」搞定～"
+        case .partial: dialog = "做了一点就是胜利，「\(task.title)」慢慢来"
+        case .abandon: dialog = "放下也是选择。「\(task.title)」改天再来"
+        }
+        return TaskOutcome(
+            type: type,
+            petDialog: dialog,
+            unlockTaskIDs: [],
+            personalityDelta: type == .perfect ? .perfect : type == .partial ? .partial : .abandon,
+            xpGain: type == .perfect ? 10 : type == .partial ? 6 : 3
         )
     }
 }

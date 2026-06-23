@@ -15,17 +15,13 @@ final class GameViewModel {
     var pendingStageUp: PetStage?
 
     init() {
-        let tasks = TaskLibrary.demoTree()
+        let tasks = TaskLibrary.simpleSamples()
         self.pet = Pet(name: "芽芽")
         self.allTasks = tasks
-        self.unlockedTaskIDs = Set()
+        // 默认所有任务都解锁（独立任务可任意选择）
+        self.unlockedTaskIDs = Set(tasks.map(\.id))
         self.completedTaskIDs = Set()
-        if let first = tasks.first {
-            self.unlockedTaskIDs.insert(first.id)
-            self.currentTaskID = first.id
-        } else {
-            self.currentTaskID = nil
-        }
+        self.currentTaskID = tasks.first?.id
     }
 
     var currentTask: TaskNode? {
@@ -75,7 +71,8 @@ final class GameViewModel {
 
     func choose(_ type: OutcomeType) {
         guard let task = currentTask, !task.isCompleted else { return }
-        guard let outcome = task.outcome(for: type) else { return }
+        // 独立任务（无预设结局）用默认反馈
+        let outcome = task.outcome(for: type) ?? TaskOutcome.defaultOutcome(type, task: task)
 
         // Mark task completed
         if let idx = allTasks.firstIndex(where: { $0.id == task.id }) {
@@ -108,21 +105,87 @@ final class GameViewModel {
         advance()
     }
 
+    // MARK: - CRUD
+
+    func addTask(_ task: TaskNode) {
+        var newTask = task
+        if newTask.day < 1 { newTask.day = 1 }
+        allTasks.append(newTask)
+        unlockedTaskIDs.insert(newTask.id)
+        if currentTaskID == nil {
+            currentTaskID = newTask.id
+        }
+    }
+
+    func updateTask(_ task: TaskNode) {
+        guard let idx = allTasks.firstIndex(where: { $0.id == task.id }) else { return }
+        allTasks[idx] = task
+    }
+
+    func deleteTask(id: UUID) {
+        allTasks.removeAll { $0.id == id }
+        completedTaskIDs.remove(id)
+        unlockedTaskIDs.remove(id)
+        // 清理其他任务对它的引用
+        for i in allTasks.indices {
+            for outcome in allTasks[i].outcomes.values {
+                let _ = outcome // 不变，但 unlockTaskIDs 可能指向已删的任务
+            }
+        }
+        if currentTaskID == id {
+            currentTaskID = allTasks.first { !completedTaskIDs.contains($0.id) }?.id
+        }
+    }
+
+    // MARK: - 切换数据集
+
+    func loadStoryDemo() {
+        let tasks = TaskLibrary.demoTree()
+        allTasks = tasks
+        unlockedTaskIDs = Set([tasks.first?.id].compactMap { $0 })
+        completedTaskIDs = Set()
+        lastDialog = nil
+        lastOutcomeType = nil
+        currentTaskID = tasks.first?.id
+    }
+
+    func loadSimpleSamples() {
+        let tasks = TaskLibrary.simpleSamples()
+        allTasks = tasks
+        unlockedTaskIDs = Set(tasks.map(\.id))
+        completedTaskIDs = Set()
+        lastDialog = nil
+        lastOutcomeType = nil
+        currentTaskID = tasks.first?.id
+    }
+
+    func clearAllTasks() {
+        allTasks = []
+        unlockedTaskIDs = Set()
+        completedTaskIDs = Set()
+        currentTaskID = nil
+        lastDialog = nil
+    }
+
     func namePet(_ name: String) {
         pet.name = name
     }
 
     func reset() {
-        let tasks = TaskLibrary.demoTree()
+        let tasks = TaskLibrary.simpleSamples()
         pet = Pet(name: pet.name.isEmpty ? "芽芽" : pet.name)
         allTasks = tasks
-        unlockedTaskIDs = Set()
+        unlockedTaskIDs = Set(tasks.map(\.id))
         completedTaskIDs = Set()
         lastDialog = nil
         lastOutcomeType = nil
-        if let first = tasks.first {
-            unlockedTaskIDs.insert(first.id)
-            currentTaskID = first.id
+        currentTaskID = tasks.first?.id
+    }
+
+    /// 跳到指定任务（用于 PlanView 点击切换）
+    func jumpToTask(id: UUID) {
+        withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
+            currentTaskID = id
         }
     }
 

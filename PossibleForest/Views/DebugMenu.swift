@@ -72,7 +72,10 @@ struct DebugMenu: View {
             }
 
             Section("流程") {
-                row("重置 Demo") { game.reset() }
+                row("重置 Demo（独立任务）") { game.reset() }
+                row("加载剧情 Demo（9 分支）") { game.loadStoryDemo() }
+                row("加载独立任务样本") { game.loadSimpleSamples() }
+                row("清空所有任务") { game.clearAllTasks() }
                 row("回到 Onboarding") {
                     UserDefaults.standard.set(false, forKey: "didOnboard")
                     game.reset()

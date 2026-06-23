@@ -3,6 +3,8 @@ import SwiftUI
 struct TaskCardView: View {
     let task: TaskNode
     @Environment(GameViewModel.self) private var game
+    @State private var showEdit: Bool = false
+    @State private var showActions: Bool = false
 
     var body: some View {
         GlassCard {
@@ -18,6 +20,15 @@ struct TaskCardView: View {
             removal: .scale(scale: 0.96).combined(with: .opacity)
         ))
         .id(task.id)
+        .contextMenu {
+            Button { showEdit = true } label: { Label("编辑任务", systemImage: "pencil") }
+            Button(role: .destructive) { game.deleteTask(id: task.id) } label: {
+                Label("删除任务", systemImage: "trash")
+            }
+        }
+        .sheet(isPresented: $showEdit) {
+            TaskEditForm(editing: task)
+        }
     }
 
     private var header: some View {

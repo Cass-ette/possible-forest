@@ -5,6 +5,7 @@ struct HomeView: View {
     @State private var showStats: Bool = false
     @State private var showDebug: Bool = false
     @State private var showTopology: Bool = false
+    @State private var showPlan: Bool = false
 
     var body: some View {
         ZStack {
@@ -54,6 +55,10 @@ struct HomeView: View {
             TopologyView()
                 .presentationDragIndicator(.visible)
         }
+        .sheet(isPresented: $showPlan) {
+            PlanView()
+                .presentationDragIndicator(.visible)
+        }
     }
 
     private var topBar: some View {
@@ -80,6 +85,17 @@ struct HomeView: View {
                 showTopology = true
             } label: {
                 Image(systemName: "map.fill")
+                    .font(.headline)
+                    .foregroundStyle(Theme.petPrimary)
+                    .padding(10)
+                    .glassCard(cornerRadius: 14)
+            }
+            .buttonStyle(PressableButtonStyle())
+
+            Button {
+                showPlan = true
+            } label: {
+                Image(systemName: "list.bullet.rectangle.portrait.fill")
                     .font(.headline)
                     .foregroundStyle(Theme.petPrimary)
                     .padding(10)
