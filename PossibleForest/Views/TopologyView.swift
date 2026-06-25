@@ -141,7 +141,13 @@ struct TopologyView: View {
 
     private var allEdges: [Edge] {
         var result: [Edge] = []
-        for task in game.allTasks {
+        let tasksWithBranches = game.allTasks.filter { task in
+            task.outcomes.values.contains { !$0.unlockTaskIDs.isEmpty }
+        }
+        let branchedIDs = Set(tasksWithBranches.map(\.id))
+
+        // 1. 预设拓扑连接（9 分支剧情）
+        for task in game.allTasks where branchedIDs.contains(task.id) {
             let fromPos = nodePosition(for: task)
             for outcome in task.outcomes.values {
                 for unlockID in outcome.unlockTaskIDs {
@@ -152,14 +158,54 @@ struct TopologyView: View {
                             from: fromPos,
                             to: toPos,
                             color: colorFor(outcome.type),
-                            opacity: unlocked ? 0.85 : 0.3,
+                            opacity: unlocked ? 0.85 : 0.35,
                             dashed: !unlocked
                         ))
                     }
                 }
             }
         }
+
+        // 2. 同一天的独立任务按顺序串联（计划路径）
+        let maxDay = max(1, game.allTasks.map(\.day).max() ?? 1)
+        for day in 1...maxDay {
+            let dayTasks = game.allTasks
+                .filter { $0.day == day && !branchedIDs.contains($0.id) }
+                .sorted { $0.title < $1.title } // 稳定排序，实际可以按创建顺序
+            for i in 0..<(dayTasks.count - 1) {
+                let prev = dayTasks[i]
+                let next = dayTasks[i + 1]
+                let fromPos = nodePosition(for: prev)
+                let toPos = nodePosition(for: next)
+                let (color, opacity, dashed) = sequentialEdgeStyle(for: prev)
+                result.append(Edge(
+                    from: fromPos,
+                    to: toPos,
+                    color: color,
+                    opacity: opacity,
+                    dashed: dashed
+                ))
+            }
+        }
+
         return result
+    }
+
+    /// 根据 prev 任务的完成状态，决定顺序边的样式
+    private func sequentialEdgeStyle(for prev: TaskNode) -> (color: Color, opacity: Double, dashed: Bool) {
+        if !prev.isCompleted {
+            return (.gray, 0.4, true) // 计划中
+        }
+        switch prev.chosenOutcome {
+        case .perfect: return (.mint, 0.85, false)
+        case .partial: return (.orange, 0.85, false)
+        case .abandon: return (.purple, 0.85, false)
+        case .none: return (.gray, 0.4, true)
+        }
+    }
+
+    private var _legacyEdgesStub: [Edge] {
+        []
     }
 
     private func colorFor(_ type: OutcomeType) -> Color {
