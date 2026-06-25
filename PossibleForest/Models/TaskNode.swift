@@ -75,6 +75,7 @@ struct TaskNode: Identifiable, Codable {
     var category: TaskCategory
     var icon: String?
     var day: Int
+    var order: Int           // 同一天内的顺序（拖拽可改）
     var outcomes: [OutcomeType: TaskOutcome]
     var isCompleted: Bool
     var chosenOutcome: OutcomeType?
@@ -86,6 +87,7 @@ struct TaskNode: Identifiable, Codable {
         category: TaskCategory,
         icon: String? = nil,
         day: Int = 1,
+        order: Int = 0,
         outcomes: [OutcomeType: TaskOutcome]
     ) {
         self.id = id
@@ -94,6 +96,7 @@ struct TaskNode: Identifiable, Codable {
         self.category = category
         self.icon = icon
         self.day = day
+        self.order = order
         self.outcomes = outcomes
         self.isCompleted = false
         self.chosenOutcome = nil

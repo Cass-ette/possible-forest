@@ -110,10 +110,30 @@ final class GameViewModel {
     func addTask(_ task: TaskNode) {
         var newTask = task
         if newTask.day < 1 { newTask.day = 1 }
+        // 自动分配 order = 当天最大 order + 1
+        let maxOrder = allTasks
+            .filter { $0.day == newTask.day }
+            .map(\.order)
+            .max() ?? -1
+        newTask.order = maxOrder + 1
         allTasks.append(newTask)
         unlockedTaskIDs.insert(newTask.id)
         if currentTaskID == nil {
             currentTaskID = newTask.id
+        }
+    }
+
+    /// 拖拽重排：在某天的任务列表中把 source 移到 destination 位置
+    func moveTask(day: Int, from source: IndexSet, to destination: Int) {
+        var dayTasks = allTasks
+            .filter { $0.day == day }
+            .sorted { $0.order < $1.order }
+        dayTasks.move(fromOffsets: source, toOffset: destination)
+        // 重新分配 order
+        for (i, task) in dayTasks.enumerated() {
+            if let idx = allTasks.firstIndex(where: { $0.id == task.id }) {
+                allTasks[idx].order = i
+            }
         }
     }
 

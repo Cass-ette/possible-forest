@@ -124,7 +124,9 @@ struct TopologyView: View {
     // MARK: - Layout
 
     private func nodePosition(for task: TaskNode) -> CGPoint {
-        let dayTasks = game.allTasks.filter { $0.day == task.day }
+        let dayTasks = game.allTasks
+            .filter { $0.day == task.day }
+            .sorted { $0.order < $1.order }
         let count = dayTasks.count
         let idx = dayTasks.firstIndex(where: { $0.id == task.id }) ?? 0
 
@@ -171,7 +173,7 @@ struct TopologyView: View {
         for day in 1...maxDay {
             let dayTasks = game.allTasks
                 .filter { $0.day == day && !branchedIDs.contains($0.id) }
-                .sorted { $0.title < $1.title } // 稳定排序，实际可以按创建顺序
+                .sorted { $0.order < $1.order }
             for i in 0..<(dayTasks.count - 1) {
                 let prev = dayTasks[i]
                 let next = dayTasks[i + 1]
